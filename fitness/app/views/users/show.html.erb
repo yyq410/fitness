@@ -1,0 +1,23 @@
+          <!-- Modal -->
+<div class="modal fade" id="show" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel"><strong>个人信息</strong></h4>
+          </div>
+      <div class="modal-body">
+        <%= form_for @user, :url => edit_user_path(@user), :method => :get do |f| %>
+        <fieldset disabled>
+          <%= render :partial => 'form', :locals => { :f => f } %>
+        </fieldset>
+        <%= f.submit "修改", :class => "btn btn-info btn-lg" %>
+        <% end %>  
+      </div>
+      </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#show').modal('show')
+</script>

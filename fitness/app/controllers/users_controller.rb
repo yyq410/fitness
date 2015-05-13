@@ -20,8 +20,40 @@ class UsersController < ApplicationController
 	   end
     end
 
+    def show
+      @user = User.find(params[:id])
+
+      if @user == nil
+        flash[:error] = "用户不存在!"
+        redirect_to :controller => 'homepage', :action => :index
+      end
+
+    end
+
+    def edit
+      @user = User.find(params[:id])
+
+      if @user == nil
+        flash[:error] = "用户不存在!"
+        redirect_to :controller => 'homepage', :action => :index
+      end
+    end
+
+    def update
+      #logger.debug "#{params}"
+      @user = User.find(params[:id])
+
+      if @user.update(user_params)
+        flash[:notice] = "修改成功~"
+        redirect_to :controller => 'homepage', :action => :index
+      else
+        flash[:error] = "修改失败！"
+        render :action => :edit
+      end
+    end
+
     private
     def user_params
-	   params.require(:user).permit(:name, :email, :password, :age, :gender)
+	   params.require(:user).permit(:name, :email, :password, :age, :gender, :avatar, :avatar_cache)
     end
 end
