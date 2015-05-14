@@ -1,0 +1,15 @@
+<div class="col-lg-11">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+    		<h4 class="text-danger"><%= "标题: " + @article.title %></h4>
+    		<h5 class="text-info"><%= "发帖时间: " + @article.created_at.to_s[0,19] %></h5>
+    		<h5 class="text-warning"><%= "发帖人: " + @user.name %></h5>
+    		<%= image_tag @user.avatar_url(:big), :class => "img-thumbnail" %>
+  		</div>
+  		<div class="panel-body">
+    		<p>
+    			<%= @article.text %>
+    		</p>
+  		</div>
+	</div>
+</div>

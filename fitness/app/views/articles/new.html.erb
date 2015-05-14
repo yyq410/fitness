@@ -1,0 +1,21 @@
+          <!-- Modal -->
+<div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel"><strong>发帖</strong></h4>
+          </div>
+      <div class="modal-body">
+        <%= form_for @article, :url => articles_path do |f| %>
+        <%= render :partial => 'form', :locals => { :f => f } %>
+        <%= f.submit "发布", :class => "btn btn-info btn-lg" %>
+        <% end %>  
+      </div>
+      </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#create').modal('show')
+</script>
