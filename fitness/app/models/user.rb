@@ -4,6 +4,6 @@ class User < ActiveRecord::Base
     validates_length_of :name, :minimum => 4
     validates_uniqueness_of :email
     validates_format_of :email, :with => /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i
-
+    has_many :messages
     mount_uploader :avatar, AvatarUploader
 end

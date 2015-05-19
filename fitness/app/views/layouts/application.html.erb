@@ -107,6 +107,11 @@
           <% else %>
             <% @user = User.find_by_name(session[:name]) %>
             <h4 class="text-success"><%= link_to @user[:name], user_path(@user) %>, 欢迎回来~</h4>
+            <% if @user[:is_administrator] == "true" %>
+              <h4 class="text-primary"><%= link_to '管理', :controller => "homepage", :action => "admin" %></h4>
+            <% else %>
+              <h4 class="text-primary"><%= link_to '通知', :controller => "homepage", :action => "show_messages" %></h4>
+            <% end %>
             <%= image_tag @user.avatar_url(:big), :class => "img-thumbnail" %>
             <%= link_to '退出', :controller => "homepage", :action => "logout", :class => "text-warning" %>
           <% end %>

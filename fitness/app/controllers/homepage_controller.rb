@@ -39,6 +39,43 @@ class HomepageController < ApplicationController
         @articles = Article.where(tag: "notice")
 
     end
+
+    def admin
+        @users = User.select("name, is_administrator")
+        @articles = Article.all
+        
+    end
+
+    def message
+        name = params[:name]
+        content = params[:content]
+
+        @user = User.find_by_name(name)
+        @user.messages.create(:name => name, :content => content)
+
+        flash[:notice] = "已发送~"
+
+        redirect_to :action => :admin
+    end
+
+    def show_messages
+        @user = User.find_by_name(session[:name])
+
+    end
+
+    def change_right
+        name = params[:name]
+        type = params[:change]
+        @user = User.find_by_name(name)
+
+        if type == "1"
+            @user.update(:is_administrator => "forbid")
+        elsif type == "2"
+            @user.update(:is_administrator => "ordinary")
+        end
+ 
+        redirect_to :action => :admin
+    end
     
     def logout
         session[:name] = nil

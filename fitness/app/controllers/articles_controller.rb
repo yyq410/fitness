@@ -6,7 +6,12 @@ class ArticlesController < ApplicationController
 	end
 
 	def new 
-		@article = Article.new
+		if session[:is_administrator] != "forbid"
+			@article = Article.new
+		else
+			flash[:error] = "您已被屏蔽!"
+			redirect_to :controller => "homepage", :action => "index"
+		end
 	end
 
 	def edit
@@ -34,6 +39,13 @@ class ArticlesController < ApplicationController
 		@article = Article.find(params[:id])
 		@user = User.find_by_name(@article[:author])
 		
+	end
+
+	def destroy
+		@article = Article.find(params[:id])
+		@article.destroy
+
+		redirect_to :controller => "homepage", :action => :index
 	end
 
 	private
