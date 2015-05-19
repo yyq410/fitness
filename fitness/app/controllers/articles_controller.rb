@@ -1,17 +1,12 @@
 class ArticlesController < ApplicationController
-	
+	before_action :check_user, :only => [:new, :create]
+
 	def index
 	
 	end
 
 	def new 
-		if session[:name] != nil
-			@article = Article.new
-
-		else
-			flash[:warning] = "您还没有登录!"
-			redirect_to :controller => 'homepage', :action => :index
-		end
+		@article = Article.new
 	end
 
 	def edit
@@ -44,6 +39,13 @@ class ArticlesController < ApplicationController
 	private
 
 	def article_params
-		params.require(:article).permit(:title, :text, :author)
+		params.require(:article).permit(:title, :text, :author, :tag)
+	end
+
+	def check_user
+		if session[:name] == nil
+			flash[:warning] = "您还没有登录!"
+			redirect_to :controller => 'homepage', :action => :index
+		end
 	end
 end

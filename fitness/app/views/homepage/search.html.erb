@@ -1,20 +1,22 @@
-	<h4 class="text-danger"><%= "帖子数: " + @articles.length.to_s %></h4>
+
 	<table class="table table-striped table-hover">
 	<% num = 1 %>
+	<% count = 0 %>
 	<% @articles.each do |article| %>
-
+	<% if @flag[num-1] %>
+	<% count += 1 %>
 	<tr class="active">
 		<% tag = article.tag %>
 		<% if tag == "post" %>
-		<% type = " 帖子 " %>
+		<% type = "帖子 " %>
 		<% type_color = "info" %>
 		<% type_icon = "fa-comment-o" %>
 		<% elsif tag == "notice" %>
-		<% type = " 公告 " %>
+		<% type = "公告 " %>
 		<% type_color = "success" %>
 		<% type_icon = "fa-bookmark" %>
 		<% elsif tag == "great" %>
-		<% type = " 精华 " %>
+		<% type = "精华 " %>
 		<% type_color = "danger" %>
 		<% type_icon = "fa-star" %>
 		<% end %>
@@ -23,7 +25,8 @@
 		<td><h5 class="text-danger"><%= article.author %></h5></td>
 		<td><h5><%= article.created_at.to_s[0,19] %></h5></td>
 	</tr>
-
+	<% end %>
 	<% num += 1 %>
 	<% end %>
+	<h4 class="text-success"><%= "匹配的帖子数: " + count.to_s %></h4>
 	</table>
