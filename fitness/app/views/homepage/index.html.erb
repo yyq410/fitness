@@ -1,6 +1,7 @@
 	<h4 class="text-danger"><%= "帖子数: " + @articles.length.to_s %></h4>
 	<table class="table table-striped table-hover">
 	<% num = 1 %>
+
 	<% @articles.each do |article| %>
 
 	<tr class="active">
@@ -27,3 +28,5 @@
 	<% num += 1 %>
 	<% end %>
 	</table>
+
+	<%= paginate @articles %>

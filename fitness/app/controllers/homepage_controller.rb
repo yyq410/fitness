@@ -1,7 +1,7 @@
 class HomepageController < ApplicationController
     def index
-    	@articles = Article.all
-
+    	#@articles = Article.all
+        @articles = Article.page(params[:page]).per(5)
     end
 
     def check
@@ -36,7 +36,7 @@ class HomepageController < ApplicationController
     end
 
     def notice
-        @articles = Article.where(tag: "notice")
+        @articles = Article.where(tag: "notice").page(params[:page]).per(5)
 
     end
 
