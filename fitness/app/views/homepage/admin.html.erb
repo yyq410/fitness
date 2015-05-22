@@ -89,7 +89,16 @@
 		<td><h5><strong><%= article.title %></strong></h5></td>
 		<td><h5 class="text-danger"><%= article.author %></h5></td>
 		<td><h5><%= article.created_at.to_s[0,19] %></h5></td>
-		<td><h5 class="text-danger"><%= link_to "删除", article_path(article), :method => :delete %></td></h5>
+		<td>
+			<h5 class="text-danger">
+				<%= link_to "删除", article_path(article), :method => :delete %>
+			</h5>
+			<% if tag != "great" %>
+			<form action="/homepage/set_star">
+					<input type="text" name="id" value="<%= article[:id] %>" class="sr-only">
+					<button type="submit" class="btn btn-danger btn-sm">设为精品</button>
+			</form>
+			<% end %>
 		</td>
 	</tr>
 

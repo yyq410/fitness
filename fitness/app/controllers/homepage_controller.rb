@@ -40,10 +40,23 @@ class HomepageController < ApplicationController
 
     end
 
+    def great
+        @articles = Article.where(tag: "great").page(params[:page]).per(5)
+        
+    end
+
     def admin
         @users = User.select("name, is_administrator")
         @articles = Article.all
         
+    end
+
+    def set_star
+        article_id = params[:id]
+        @article = Article.find(article_id)
+        @article.update(:tag => "great")
+
+        redirect_to :action => :admin
     end
 
     def message
