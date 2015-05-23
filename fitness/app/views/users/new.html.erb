@@ -7,6 +7,7 @@
               <h4 class="modal-title" id="myModalLabel"><strong>注册页面</strong></h4>
           </div>
       <div class="modal-body">
+        <h4><strong id="validate" class="text-danger"></strong></h4>
         <%= form_for @user, :url => users_path do |f| %>
         <%= render :partial => 'form', :locals => { :f => f } %>
         <%= f.submit "新建", :class => "btn btn-info btn-lg" %>
@@ -18,4 +19,19 @@
 
 <script type="text/javascript">
   $('#register').modal('show')
+
+  $(document).ready(function(){
+    $("form").submit(function(e){
+
+      if ($("#user_name").val().length < 4){
+        $("#validate").text("用户名长度至少为4！") 
+        e.preventDefault();
+      }
+      else if ($("#user_password").val().length < 6 || $("#user_password").val() != $("#Password2").val()){
+        $("#validate").text("两次密码输入不一致！") 
+        e.preventDefault();
+      }
+    });
+  });
+
 </script>

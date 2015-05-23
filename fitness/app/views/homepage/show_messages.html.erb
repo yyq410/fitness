@@ -4,14 +4,13 @@
 		<th><h5 class="text-info">消息内容</h5></th>
 		<th><h5>时间</h5></th>
 	</tr>
-	<% count = 0 %>
+
 	<% @user.messages.each do |message| %>
-	<% count += 1 %>
 		<tr class="active">
 			<td>管理员</td>
 			<td><%= message.content %></td>
 			<td><%= message.created_at.to_s[0,19] %></td>
 		</tr>
 	<% end %>
-	<h4 class="text-success"><%= "匹配的帖子数: " + count.to_s %></h4>
+	
 </table>

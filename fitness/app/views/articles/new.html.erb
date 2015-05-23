@@ -7,6 +7,7 @@
               <h4 class="modal-title" id="myModalLabel"><strong>发帖</strong></h4>
           </div>
       <div class="modal-body">
+      <h4><strong id="validate" class="text-danger"></strong></h4>
         <%= form_for @article, :url => articles_path do |f| %>
         <%= render :partial => 'form', :locals => { :f => f } %>
         <%= f.submit "发布", :class => "btn btn-info btn-lg" %>
@@ -18,4 +19,20 @@
 
 <script type="text/javascript">
   $('#create').modal('show')
+
+  $(document).ready(function(){
+    $("form").submit(function(e){
+  
+      if ($("#article_title").val().length == 0){
+        $("#validate").text("标题不能为空！") 
+        e.preventDefault();
+      }
+      else if ($("#article_text").val().length == 0){
+        $("#validate").text("内容不能为空！") 
+        e.preventDefault();
+      }
+
+    });
+  });
+
 </script>

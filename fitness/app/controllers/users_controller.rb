@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
     def create
 	   @user = User.new(user_params)
+     @user[:is_administrator] = "ordinary"
 
 	   if @user.save		
            redirect_to :controller => 'homepage', :action => :index

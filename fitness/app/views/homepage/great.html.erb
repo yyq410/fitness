@@ -4,7 +4,7 @@
 	<% @articles.each do |article| %>
 
 	<tr class="active">
-		<td><h4 class="text-success"><i class="fa fa-bookmark"><%= " 精品 " + num.to_s %></h4></td>>
+		<td><h4 class="text-danger"><i class="fa fa-star"><%= " 精品 " + num.to_s %></h4></td>>
 		<td><h4><strong><%= link_to article.title, article_path(article) %></strong></h4></td>
 		<td><h5 class="text-danger"><%= article.author %></h5></td>
 		<td><h5><%= article.created_at.to_s[0,19] %></h5></td>
